@@ -6,13 +6,16 @@ from telebot import types
 
 bot = telebot.TeleBot(config.TOKEN)
 
-#Приветственное сообщение при команде '/start'
+# Приветственное сообщение при команде '/start'
+
+
 @bot.message_handler(commands=['start'])
 def zdarova(message):
     bot.send_message(message.chat.id, "Жеееесть, {0.first_name} опять жрать хочет".format(message.from_user, bot.get_me()),
 		parse_mode='html', reply_markup=markup)
 
-#Клавиатура
+
+# Клавиатура
 markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 item1 = types.KeyboardButton('Чё сожрать?')
 
@@ -53,6 +56,7 @@ markup.add(item1)
 foods = list(map(lambda x: x['food'], жри))
 weights = list(map(lambda x: x['weight'], жри))
 
+
 @bot.message_handler(content_types=['text'])
 def messagelist(message):
   if message.text == 'Чё сожрать?':
@@ -60,5 +64,6 @@ def messagelist(message):
   else:
     bot.send_message(message.chat.id, 'Блять, ты тупой? Тут одна кнопка, на неё и жми жесть')
 
-#Запуск бота
+
+# Запуск бота
 bot.polling(none_stop=True, interval=0)
