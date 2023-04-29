@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -t jribot .
+      run: docker build -t dreyspi/jri-bot:latest .; docker push dreyspi/jri-bot:latest
