@@ -1,9 +1,7 @@
-FROM python:3.9
+from python:slim-bookworm 
 
-ADD bot2.py .
-ADD config.py .
-ADD requirements.txt .
+COPY ./src ./app
+WORKDIR ./app
+RUN pip install -r ./requirements.txt --no-cache-dir
 
-RUN pip install -r ./requirements.txt
-
-CMD ["python", "./bot2.py"]
+ENTRYPOINT ["python", "./main.py"]
